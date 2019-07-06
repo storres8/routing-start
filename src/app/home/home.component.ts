@@ -12,9 +12,14 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {}
 
-  onLoadServers() {
+  onLoadServers(id: number) {
     // .navigate take as an argument an array of the different segments of your path.
     // Your path can be either absolute or relative.
-    this.router.navigate(["/servers"]);
+    //
+    // This also demonstrates how to programatically send query parameters and fragments.
+    this.router.navigate(["/servers", id, "edit"], {
+      queryParams: { allowEdit: 1 },
+      fragment: "loading"
+    });
   }
 }
