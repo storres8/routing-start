@@ -17,6 +17,7 @@ export class ServerComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // using the + to convert the string to a number once we get the id.
     const id = +this.route.snapshot.params["id"];
     this.server = this.serversService.getServer(id);
 

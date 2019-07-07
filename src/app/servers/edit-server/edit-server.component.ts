@@ -21,8 +21,9 @@ export class EditServerComponent implements OnInit {
   ngOnInit() {
     // snapshot works only once, and is used if you know you won't be changing your fragment or QPs from
     // inside this component.
-    console.log(this.route.snapshot.queryParams);
-    console.log(this.route.snapshot.fragment);
+    //
+    // console.log(this.route.snapshot.queryParams);
+    // console.log(this.route.snapshot.fragment);
 
     // using .subscribe allows you to react to changed query/fragment parameters.
     this.route.queryParams.subscribe();
