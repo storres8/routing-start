@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
 import { ServersService } from "../servers.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Params } from "@angular/router";
 
 @Component({
   selector: "app-edit-server",
@@ -12,6 +12,7 @@ export class EditServerComponent implements OnInit {
   server: { id: number; name: string; status: string };
   serverName = "";
   serverStatus = "";
+  allowEdit = false;
 
   constructor(
     private serversService: ServersService,
@@ -26,7 +27,10 @@ export class EditServerComponent implements OnInit {
     // console.log(this.route.snapshot.fragment);
 
     // using .subscribe allows you to react to changed query/fragment parameters.
-    this.route.queryParams.subscribe();
+    this.route.queryParams.subscribe((queryParams: Params) => {
+      // queryParams is just an object so we access it my providing the key.
+      this.allowEdit = queryParams["allowEdit"] === "1" ? true : false;
+    });
     this.route.fragment.subscribe();
 
     this.server = this.serversService.getServer(1);
