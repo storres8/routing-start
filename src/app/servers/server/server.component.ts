@@ -34,6 +34,14 @@ export class ServerComponent implements OnInit {
     // along side the relative array to show the current path that we are on.
     // This.route value inside the object houses are current path. We then use relative path to append edit
     // since we already have the id in the current path.
-    this.router.navigate(["edit"], { relativeTo: this.route });
+
+    // we added queryParamsHandling which does as the name suggests. It has two values: merge or preserve. The
+    // default behavior of switching routes is to eliminate any existing QPs in the route when we render
+    // a new route. But with queryParamsHandling we can merge any old QPs with new ones set here, or simply
+    // preserve the old ones into this component with the preserve value.
+    this.router.navigate(["edit"], {
+      relativeTo: this.route,
+      queryParamsHandling: "preserve"
+    });
   }
 }
