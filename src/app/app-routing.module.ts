@@ -8,6 +8,7 @@ import { UserComponent } from "./users/user/user.component";
 import { EditServerComponent } from "./servers/edit-server/edit-server.component";
 import { ServerComponent } from "./servers/server/server.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+import { AuthGuard } from "./auth-guard.service";
 
 // the path already includes into it the localhost blah blah and goes to /<path>
 const appRoutes: Routes = [
@@ -19,6 +20,9 @@ const appRoutes: Routes = [
   },
   {
     path: "servers",
+    // can activate takes an array of all the guards that you wish to apply to this route, and automatically
+    // applies it to all the child routes.
+    canActivate: [AuthGuard],
     component: ServersComponent,
     children: [
       { path: ":id", component: ServerComponent },
