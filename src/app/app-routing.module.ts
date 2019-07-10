@@ -22,7 +22,8 @@ const appRoutes: Routes = [
     path: "servers",
     // can activate takes an array of all the guards that you wish to apply to this route, and automatically
     // applies it to all the child routes.
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
     component: ServersComponent,
     children: [
       { path: ":id", component: ServerComponent },
