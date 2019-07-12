@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
 import { ServersService } from "../servers.service";
-import { ActivatedRoute, Params, Router } from "@angular/router";
+import { ActivatedRoute, Params, Router, Data } from "@angular/router";
 
 @Component({
   selector: "app-server",
@@ -18,14 +18,24 @@ export class ServerComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // using the + to convert the string to a number once we get the id.
-    const id = +this.route.snapshot.params["id"];
-    this.server = this.serversService.getServer(id);
+    // the commented out code below is how we origianlly loaded a server- through the params.
 
-    // subscribed to the event, but don't have to in this case b/c we are not changing our params in this
-    // component. We are changing our params when we click a new server from the the servers component.
-    this.route.params.subscribe((params: Params) => {
-      this.server = this.serversService.getServer(+params["id"]);
+    // // using the + to convert the string to a number once we get the id.
+    // const id = +this.route.snapshot.params["id"];
+    // this.server = this.serversService.getServer(id);
+
+    // // subscribed to the event, but don't have to in this case b/c we are not changing our params in this
+    // // component. We are changing our params when we click a new server from the the servers component.
+    // this.route.params.subscribe((params: Params) => {
+    //   this.server = this.serversService.getServer(+params["id"]);
+    // });
+
+    // we are now using our server resolver to access our server data. The server key used in the newData object
+    // is the same as the resolver key that we placed in our routes. So once the route loads, it will also
+    // initiate the method that we build into our resolver and thus load the specific server. We then save
+    // this new server as a value to the server key in our resolve object which is accessed here.
+    this.route.data.subscribe((newData: Data) => {
+      this.server = newData["server"];
     });
   }
 
