@@ -54,6 +54,10 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
+  // We can also pass into the forRoot method a useHash key that will use hashes in our URL for older browsers.
+  // This inserts a hashtag into your url right after your domain. They hashtag tells the server to only worry
+  // about the things before the hash and the rest will be hanfled by the front-end.
+  // imports: [RouterModule.forRoot(appRoutes, { useHash: true })],
   imports: [RouterModule.forRoot(appRoutes)],
   //   we export the entire RouterModule that we set up above.
   exports: [RouterModule]
